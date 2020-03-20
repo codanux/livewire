@@ -7,21 +7,28 @@ use Livewire\Component;
 
 class PostShow extends Component
 {
-    public $post, $name,$body;
+    public $postId, $name,$body;
 
-    public function mount(Post $post)
+    public function mount($post)
     {
-        $this->post = $post;
-        $this->name = $post->name;
-        $this->body = $post->body;
+        if ($post != 'create')
+        {
+            $this->postId = $post;
+            $post = Post::findOrFail($post);
+            $this->name = $post->name;
+            $this->body = $post->body;
+        }
     }
 
-    public function update()
+    public function save()
     {
-        $this->post->update([
+        $post = Post::updateOrCreate(['id' => $this->postId],
+        [
             'name' => $this->name,
             'body' => $this->body
         ]);
+
+        $this->postId = $post->id;
     }
     public function render()
     {

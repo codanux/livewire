@@ -1,5 +1,6 @@
 <div class="container">
-    <form wire:submit.prevent="update">
+    <form wire:submit.prevent="save">
+        <input type="hidden" wire:model="post.id">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" wire:model="name">
