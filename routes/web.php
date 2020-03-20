@@ -22,10 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::layout('layouts.app')->section('content')->group(function (){
-    Route::livewire('/posts', 'app.post-index')
-        ->name('post.index');
-
-    Route::livewire('/post/{post}', 'app.post-show')
-        ->name('post.show');
+    Route::livewire('/posts', 'app.post-index')->name('post.index');
+    Route::livewire('/post/{post}', 'app.post-show')->name('post.show');
 
 });
