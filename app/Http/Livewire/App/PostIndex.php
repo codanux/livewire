@@ -4,17 +4,16 @@ namespace App\Http\Livewire\App;
 
 use App\Post;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostIndex extends Component
 {
-    public $posts;
-
-    public function mount(){
-        $this->posts = Post::all();
-    }
+    use WithPagination;
 
     public function render()
     {
-        return view('livewire.app.post-index');
+        return view('livewire.app.post-index', [
+            'posts' => Post::paginate(1),
+        ]);
     }
 }
