@@ -16,6 +16,14 @@ class PostShow extends Component
 
     public function save()
     {
+        $this->validate([
+            'post.name' => 'required',
+            'post.body' => 'required'
+        ],[],[
+            'post.name' => 'Post Adı',
+            'post.body' => 'İçerik'
+        ]);
+
         if (isset($this->post['id']))
         {
             Post::find($this->post['id'])->update($this->post);

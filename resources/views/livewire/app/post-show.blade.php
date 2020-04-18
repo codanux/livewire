@@ -1,9 +1,4 @@
 <div class="container" xmlns:wire="http://www.w3.org/1999/xhtml">
-    <div wire:loading>
-        Processing Payment...
-    </div>
-
-    @json($post)
     <div>
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -16,12 +11,22 @@
 
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" wire:model="post.name">
+            <input type="text" class="form-control @error('post.name') is-invalid @enderror" id="name" wire:model="post.name">
+            @error('post.name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="body">Body</label>
-            <textarea class="form-control" id="body" wire:model="post.body"></textarea>
+            <textarea class="form-control @error('post.body') is-invalid @enderror" id="body" wire:model="post.body"></textarea>
+            @error('post.body')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
 
 
@@ -33,4 +38,8 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <div wire:loading wire:target="save">
+        Data Kaydediliyor
+    </div>
 </div>
