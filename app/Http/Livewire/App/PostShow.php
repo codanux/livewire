@@ -7,20 +7,28 @@ use Livewire\Component;
 
 class PostShow extends Component
 {
-    public $post;
+    public $post = [];
 
     public function mount($post)
     {
-        if ($post != 'create')
+        if ($post = Post::find($post))
         {
-            $this->post = Post::find($post)->toArray();
+            $this->post = $post->toArray();
         }
     }
 
     public function save()
     {
-        Post::updateOrCreate(['id' => $this->post['id']], $this->post);
-        session()->flash('message', 'update');
+        if (isset($this->post['id']))
+        {
+            Post::find($this->post['id'])->update($this->post);
+            session()->flash('message', 'update');
+        }
+        else
+        {
+            $this->post = Post::create($this->post)->toArray();
+            session()->flash('message', 'create');
+        }
     }
 
     public function render()
