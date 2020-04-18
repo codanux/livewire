@@ -9,12 +9,9 @@ class PostShow extends Component
 {
     public $post = [];
 
-    public function mount($post)
+    public function mount(Post $post)
     {
-        if ($post = Post::find($post))
-        {
-            $this->post = $post->toArray();
-        }
+        $this->post = $post->toArray();
     }
 
     public function save()

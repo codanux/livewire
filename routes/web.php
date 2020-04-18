@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::layout('layouts.app')->section('content')->group(function (){
     Route::livewire('/posts', 'app.post-index')->name('post.index');
+    Route::livewire('/post/create', 'app.post-show')->name('post.create');
     Route::livewire('/post/{post}', 'app.post-show')->name('post.show');
 
 });
